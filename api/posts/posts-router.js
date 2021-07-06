@@ -36,9 +36,19 @@ router.post('/', (req,res) => {
     if(!title || !contents){
         res.status(404).json({ message: "Please provide title and contents for the post"})
     } else {
-        Posts.insert({title, contents})
+        Posts.insert(req.body)
         .then(createdPost => {
-            res.status(200).json(createdPost)
+            console.log("made it here")
+            console.log(createdPost)
+            Posts.findById(createdPost.id)
+                .then(post => {
+                    console.log("made it here number 2")
+                    console.log(post)
+                     res.status(200).json(post);
+            })
+        .catch(err => {
+            res.status(500).json({ message: "The posts information could not be retrieved" })
+        })
         })
         .catch(err => {
             res.status(500).json({ message: "There was an error while saving the post to the database"})
