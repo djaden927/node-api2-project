@@ -34,7 +34,7 @@ router.post('/', (req,res) => {
     const { title, contents } = req.body;
 
     if(!title || !contents){
-        res.status(404).json({ message: "Please provide title and contents for the post"})
+        res.status(400).json({ message: "Please provide title and contents for the post"})
     } else {
         Posts.insert(req.body)
         .then(createdPost => {
