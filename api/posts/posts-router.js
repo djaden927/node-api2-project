@@ -44,7 +44,7 @@ router.post('/', (req,res) => {
                 .then(post => {
                     console.log("made it here number 2")
                     console.log(post)
-                     res.status(200).json(post);
+                     res.status(201).json(post);
             })
         .catch(err => {
             res.status(500).json({ message: "The posts information could not be retrieved" })
